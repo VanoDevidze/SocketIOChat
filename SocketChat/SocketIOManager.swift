@@ -29,11 +29,11 @@ class SocketIOManager: NSObject {
     }
     
     
-    func connectToServerWithNickname(nickname: String, completionHandler: (userList: [[String: AnyObject]]!) -> Void) {
-        socket.emit("connectUser", nickname)
+    func connectToServerWithNickname(nickname: String, completionHandler: (_ userList: [[String: AnyObject]]!) -> Void) {
+        socket.emit(event: "connectUser", withItems: [])
         
-        socket.on("userList") { ( dataArray, ack) -> Void in
-            completionHandler(userList: dataArray[0] as! [[String: AnyObject]])
+        socket.on(event: "userList") { ( dataArray, ack) -> Void in
+            completionHandler(dataArray[0] as! [[String: AnyObject]])
         }
         
         listenForOtherMessages()
@@ -41,13 +41,13 @@ class SocketIOManager: NSObject {
     
     
     func exitChatWithNickname(nickname: String, completionHandler: () -> Void) {
-        socket.emit("exitUser", nickname)
+        socket.emit(event: "exitUser", withItems: [])
         completionHandler()
     }
     
     
     func sendMessage(message: String, withNickname nickname: String) {
-        socket.emit("chatMessage", nickname, message)
+        socket.emit(event: "chatMessage", nickname, message)
     }
     
     

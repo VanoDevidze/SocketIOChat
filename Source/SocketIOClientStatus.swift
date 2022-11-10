@@ -29,15 +29,15 @@ import Foundation
 
     public var description: String {
         switch self {
-        case NotConnected:
+        case .NotConnected:
             return "Not Connected"
-        case Closed:
+        case .Closed:
             return "Closed"
-        case Connecting:
+        case .Connecting:
             return "Connecting"
-        case Connected:
+        case .Connected:
             return "Connected"
-        case Reconnecting:
+        case .Reconnecting:
             return "Reconnecting"
         }
     }
